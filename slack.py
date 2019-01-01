@@ -15,7 +15,7 @@ global MESSAGE, FILENAME, FILE_FOUND
 # settings
 ###############################################
 WEBHOOK_URL="https://slack.com/api/files.upload"
-WEBHOOK_TITLE = ":warning: Motion Detected!\n\n" # https://api.slack.com/docs/message-formatting
+WEBHOOK_TITLE = ":warning: Motion Detected!\n" # https://api.slack.com/docs/message-formatting
 WEBHOOK_CAMERA = "Garage" # change to the name of your camera
 WEBHOOK_CHANNELS = "YOUR_CHANNEL_ID" # enclose with [] if multiple channels
 WEBHOOK_AUTH_BEAR = "Bearer YOUR_BEARER_TOKEN"
