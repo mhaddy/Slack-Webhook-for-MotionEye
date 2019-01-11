@@ -4,7 +4,7 @@
 # license: MIT
 
 # Slack webhook for MotionEyeOS
-# adapted from https://github.com/IAmOrion/MotionEyeOS_Add-On_Scripts and https://github.com/ccrisan/motioneyeos/issues/1557
+# adapted from https://github.com/IAmOrion/MotionEyeOS_Add-On_Scripts with inspiration from https://github.com/ccrisan/motioneyeos/issues/1557
 # utilizes https://healthchecks.io as a heartbeat monitor for issuing motion notifications (also integrated into cron)
 # Ryan Matthews
 # https://github.com/mhaddy
@@ -12,8 +12,11 @@
 
 import config as cv
 import pycurl, cStringIO, glob, os, json, pytz, datetime, time
+import logging
 
-global MESSAGE, FILENAME, FILE_FOUND
+global FILENAME, FILE_FOUND
+
+logging.basicConfig(filename=cv.LOG_DIR+cv.LOG_FILENAME,format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 
 WEBHOOK_URL = "https://slack.com/api/files.upload"
 WEBHOOK_AUTH_BEAR = "Bearer " + cv.BEARER_TOKEN
@@ -40,23 +43,23 @@ def find_latest_file():
 	global FILE_FOUND, FILENAME
 	FILE_FOUND = 0
 	TODAYS_DATE = datetime.datetime.today().strftime('%Y-%m-%d')
-	TODAYS_DATE_FOLDER = cv.MEDIA_FOLDER + TODAYS_DATE + '/*.jpg'
+	TODAYS_DATE_FOLDER = cv.MEDIA_DIR + TODAYS_DATE + '/*.jpg'
 
-	LIST_OF_FILES = glob.glob(TODAYS_DATE_FOLDER) 
-	
+	LIST_OF_FILES = glob.glob(TODAYS_DATE_FOLDER)
+
 	try:
 		LATEST_FILE = max(LIST_OF_FILES, key=os.path.getctime)
 		FILE_FOUND = 1
 
 	except ValueError:
 		FILE_FOUND = 0
-	
+
 	if FILE_FOUND:
 		FILENAME = LATEST_FILE
-	else: 
+	else:
 		FILENAME = '/data/output/noimage.jpg'
-		
-def send_to_slack():	
+
+def send_to_slack():
 	buf = cStringIO.StringIO()
 
 	c = pycurl.Curl()
@@ -68,30 +71,24 @@ def send_to_slack():
 	if os.path.isfile(FILENAME):
                 c.setopt(c.HTTPPOST, [("initial_comment", cv.INIT_COMMENT + MESSAGE_TIME),("title", cv.CAMERA_NAME),("channels", cv.CHANNEL_ID),("file", (c.FORM_FILE, FILENAME))])
 	else:
-		c.setopt(c.HTTPPOST, [("initial_comment", cv.INIT_COMMENT + MESSAGE_TIME),])
-	
+		c.setopt(c.HTTPPOST, [("initial_comment", cv.INIT_COMMENT + MESSAGE_TIME),("channels", cv.CHANNEL_ID),])
+
 	c.setopt(c.VERBOSE, PYCURL_VERBOSE)
-	
+
 	c.perform()
 	c.close()
-	
+
 	f = buf.getvalue()
 	buf.close()
-	
-	if cv.DEBUG:	
-		print(f)
-		
-print("\n================================================================================")
-print(" MotionEyeOS - Motion Detected, Running Slack Script... ")
-print("================================================================================\n")
+
+	if cv.DEBUG:
+		logging.debug(f)
+
+logging.info("----------------------------")
+logging.info("{} Motion detected on {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S %Z%z"),cv.CAMERA_NAME))
 
 if cv.DISPLAY_IMAGE:
 	find_latest_file()
-	
-	print("Finding last captured still image...")
-	
-send_to_slack()
+	logging.info("Finding last captured still image...")
 
-print("\n================================================================================")
-print(" MotionEyeOS - Motion Detected, Discord Script Completed ")
-print("================================================================================\n")
+send_to_slack()
