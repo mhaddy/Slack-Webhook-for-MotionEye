@@ -19,11 +19,11 @@ python /data/{name of repo}/slack.py &
 1. Include a link to the video (if captured)
 
 ### Cronjob Health Checks
-Ensure your MotionEye/OS system is online by registering for a free account on https://www.healthchecks.io and setting up a monitor. Then create a cron job with the following configuration:
+Ensure your MotionEye/OS system is online by registering for a free account on https://www.healthchecks.io and setting up a heart beat monitor (you can also use other services like cronitor.io). Then open your crontab editor:
 ```
 crontab -e
 ```
-Then type in the following:
+Then type in the following to check every 60 mins whether your Pi is online:
 ```
-0 * * * * {user} curl -fsS --retry 3 https://hc-ping.com/{hash} > /dev/null
+*/60 * * * * {user} curl -fsS --retry 3 https://hc-ping.com/{hash} > /dev/null
 ```
