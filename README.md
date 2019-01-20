@@ -7,6 +7,7 @@ Detailed instructions coming later.
 3. Modify the following variables (at a minimum) in config.py per your details:
 
    a. CHANNEL_ID (Find this in the URL of your channel, e.g., https://{team-id}.slack.com/messages/{CHANNEL_ID}
+   
    b. BEARER_TOKEN (Get your OAUTH access token [here](https://api.slack.com/docs/oauth))
 
 4. Within your MotionEye/OS web front-end, login with your admin account and configure the camera you'd like to configure notifications for.
