@@ -14,7 +14,7 @@ Detailed instructions coming later.
 5. Scroll to the bottom until you see Motion Notifications (you must first ensure Motion Detection is on).
 6. Toggle to 'on' the 'Run an End Command' and enter the following:
 ```
-python /absolute/path/to/your/motion-install/{name of repo}/slack.py &
+python /absolute-path-to-your-motion-install/data/{name of repo}/slack.py &
 ```
 7. Hit save! You should now receive notifications in your designated Slack channel upon every motion notification with the snapshot image of the motion detection.
 
