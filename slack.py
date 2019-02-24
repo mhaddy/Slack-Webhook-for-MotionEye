@@ -4,7 +4,7 @@
 # license: MIT
 
 # Single-cam Slack webhook for MotionEyeOS
-# No longer maintained - refer to multicam_slack.py for newest updates
+# This file (slack.py) is no longer maintained (but should still work) - refer to multicam_slack.py for newest updates
 # adapted from https://github.com/IAmOrion/MotionEyeOS_Add-On_Scripts with inspiration from:
 # - https://github.com/ccrisan/motioneyeos/issues/1557
 # - https://github.com/kabadisha/motioneyeos-discord-notifier
@@ -20,7 +20,9 @@ from tzlocal import get_localzone
 
 global FILENAME, FILE_FOUND
 
-logging.basicConfig(filename=cv.LOG_DIR+cv.LOG_FILENAME,format='%(asctime)s : %(levelname)s : %(message)s',level=logging.DEBUG)
+# change logging.INFO to logging.DEBUG at the end of this line
+# if you're experiencing issues or need help during initial setup
+logging.basicConfig(filename=cv.LOG_DIR+cv.LOG_FILENAME,format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 
 WEBHOOK_URL = "https://slack.com/api/files.upload"
 WEBHOOK_AUTH_BEAR = "Bearer " + cv.BEARER_TOKEN
