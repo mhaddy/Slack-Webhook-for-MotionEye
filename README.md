@@ -3,12 +3,12 @@ Add-on script for MotionEye/OS that enables motion notifications on Slack. Displ
 
 :boom: Now with multi-camera support with just one file thanks to some excellent argparse from [Kabadisha](https://github.com/kabadisha/motioneyeos-discord-notifier). Originally inspired by [IAmOrion](https://github.com/IAmOrion/MotionEyeOS_Add-On_Scripts).
 
-Detailed instructions coming later.
+### Setup Instructions
 1. Clone this repo into your /data directory of your [Motion install](https://github.com/ccrisan/motioneye).
 2. Rename config.py.EXAMPLE to config.py.
 3. Modify the following variables (at a minimum) in config.py per your details:
 
-   a. CHANNEL_ID (Find this in the URL of your channel, e.g., https://{team-id}.slack.com/messages/{CHANNEL_ID}
+   a. CHANNEL_ID (Find this in the URL of your channel, e.g., https://{team-id}.slack.com/messages/{CHANNEL_ID})
    
    b. BEARER_TOKEN (Get your OAUTH access token [here](https://api.slack.com/docs/oauth))
    
@@ -18,7 +18,7 @@ Detailed instructions coming later.
 5. Scroll to the bottom until you see Motion Notifications (you must first ensure Motion Detection is on).
 6. Toggle to 'on' the 'Run an End Command' (so a notification is only triggered at the end of a motion occurrence) and enter the following, replacing -n "Garage" with the name of your camera:
 ```
-# python /{absolute-path-to-your-motion-install}/data/Slack-Webhook-for-MotionEye/multicam_slack.py -n "Garage" -p %f -q %q -v %v &
+python /{absolute-path-to-your-motion-install}/data/Slack-Webhook-for-MotionEye/multicam_slack.py -n "Garage" -p %f -q %q -v %v &
 ```
 7. Hit save! You should now receive notifications in your designated Slack channel upon every motion notification with the snapshot image of the motion detection.
 
