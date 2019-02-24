@@ -1,14 +1,24 @@
-# configuration file for slack.py
+# configuration file for Slack webhook
+
+# MUST SET THE FOLLOWING VARS AT A MIN:
+# - CHANNEL_ID
+# - BEARER_TOKEN
+# - LOG_DIR
+# and only if using legacy slack.py, also set:
+# - MEDIA_DIR
 
 CHANNEL_ID = "C04..." # ID of the slack channel that will receive notifications
-CAMERA_NAME = "Garage" # used in notifications only
 BEARER_TOKEN = "" # OAuth access token from Slack API, https://api.slack.com/docs/oauth
-DEBUG = 1 # 0|1 If enabled, output from call will be displayed in terminal
-PYCURL_VERBOSE = True  # True|False If enabled, can be useful for debugging the REST call
-INIT_COMMENT = ":warning: Motion Detected! " # title that appears before the image, https://api.slack.com/docs/message-formatting
+DEBUG = 0 # 0|1 If enabled, output from call will be displayed in terminal
+PYCURL_VERBOSE = False  # True|False If enabled, can be useful for debugging the REST call
+INIT_COMMENT = ":warning: [*{}*] Motion detected! " # title that appears before the image, https://api.slack.com/docs/message-formatting
 USER_AGENT = "MotionEyeOS" # User agent that is sent in the REST call
 MESSAGE_DATEFORMAT = "%Y/%m/%d @ %I:%M:%S %p" # Date format used in the message itself https://www.tutorialspoint.com/.com/python/time_strftime.htm
 DISPLAY_IMAGE = 1 # 0|1 If enabled, will display the latest image from the motion detection
-MEDIA_DIR = '/home/{USER}/motioneye/media/Camera1/' # absolute path with trailing slash; modify to the path where the images are stored (only required if DISPLAY_IMAGE = 1
 LOG_DIR = '/home/{USER}/motioneye/log/' # absolute path with trailing slash; modify to desired log directory
 LOG_FILENAME = 'slack.log' # modify to desired log filename
+
+# these variables are only used in the legacy slack.py
+# if you are using multicam_slack.py, disregard
+CAMERA_NAME = "Garage" # used in notifications only
+MEDIA_DIR = '/home/{USER}/motioneye/media/Camera1/' # absolute path with trailing slash; modify to the path where the images are stored (only required if DISPLAY_IMAGE = 1
