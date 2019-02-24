@@ -10,7 +10,7 @@ Detailed instructions coming later.
 
    a. CHANNEL_ID (Find this in the URL of your channel, e.g., https://{team-id}.slack.com/messages/{CHANNEL_ID}
    
-   b. BEARER_TOKEN (Get your OAUTH access token [here](https://api.slack.com/docs/oauth)
+   b. BEARER_TOKEN (Get your OAUTH access token [here](https://api.slack.com/docs/oauth))
    
    c. LOG_DIR (location of log file)
 
