@@ -61,6 +61,8 @@ parser.add_argument("-q", "--frame", help="%%q option from MotionEye (frame numb
 parser.add_argument("-v", "--eventnumber", help="%%v option from MotionEye; used in debug log file", type=int)
 args = parser.parse_args();
 
+logging.debug("arparse debug | n {} | p {} | q {} | v {}".format(args.cameraname, args.mediadir, args.frame, args.eventnumber))
+
 def find_latest_file(args):
 	global FILE_FOUND, FILENAME
 	FILE_FOUND = 0
