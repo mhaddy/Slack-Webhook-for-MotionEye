@@ -16,9 +16,9 @@ Add-on script for MotionEye/OS that enables motion notifications on Slack. Displ
 
 4. Within your MotionEye/OS web front-end, login with your admin account and configure the camera you'd like to configure notifications for.
 5. Scroll to the bottom until you see Motion Notifications (you must first ensure Motion Detection is on).
-6. Toggle to 'on' the 'Run an End Command' (so a notification is only triggered at the end of a motion occurrence) and enter the following, replacing -n "Garage" with the name of your camera:
+6. Toggle to 'on' the 'Run an End Command' (so a notification is only triggered at the end of a motion occurrence) and enter the following, replacing -n "Garage" with the name of your camera, and the path to your media directory for the specified camera:
 ```
-python /{absolute-path-to-your-motion-install}/data/Slack-Webhook-for-MotionEye/multicam_slack.py -n "Garage" -p %f -q %q -v %v &
+python /{absolute-path-to-your-motion-install}/data/Slack-Webhook-for-MotionEye/multicam_slack.py -n "Garage" -p "/{absolute-path-to-your-motion-install}/media/Camera1/" -q %q -v %v &
 ```
 7. Hit save! You should now receive notifications in your designated Slack channel upon every motion notification with the snapshot image of the motion detection.
 
